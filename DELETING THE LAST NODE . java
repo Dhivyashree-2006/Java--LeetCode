@@ -1,0 +1,69 @@
+import java.util.Scanner;
+
+class Node {
+    int data;
+    Node next;
+
+    Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+public class Main {
+    static Node head = null;
+
+    static void deleteAtEnd() {
+        if (head == null) {
+            return;
+        }
+
+        if (head.next == null) {
+            head = null;
+            return;
+        }
+
+        Node temp = head;//100
+
+        while (temp.next.next != null) {//NULL!=NULL
+            temp = temp.next;//200
+        }
+
+        temp.next = null;
+    }
+
+    static void display() {
+        Node temp = head;
+
+        while (temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+
+        for (int i = 0; i < n; i++) {
+            Node newNode = new Node(sc.nextInt());
+
+            if (head == null) {
+                head = newNode;
+            } else {
+                Node temp = head;
+
+                while (temp.next != null) {
+                    temp = temp.next;
+                }
+
+                temp.next = newNode;
+            }
+        }
+
+        deleteAtEnd();
+
+        display();
+    }
+}
