@@ -1,0 +1,80 @@
+import java.util.Scanner;
+
+class Node {
+    int data;
+    Node next;
+
+    Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+public class Main {
+    static Node head = null;
+
+    static void insert(int data) {
+        Node newNode = new Node(data);
+
+        if (head == null) {
+            head = newNode;
+        } else {
+            Node temp = head;
+
+            while (temp.next != null) {
+                temp = temp.next;
+            }
+
+            temp.next = newNode;
+        }
+    }
+
+    static void deleteAtPosition(int pos) {
+        if (head == null) {
+            return;
+        }
+
+        if (pos == 1) {
+            head = head.next;
+            return;
+        }
+
+        Node temp = head;
+
+        for (int i = 1; i < pos - 1 && temp != null; i++) {
+            temp = temp.next;
+        }
+
+        if (temp == null || temp.next == null) {
+            System.out.println("Invalid Position");
+            return;
+        }
+
+        temp.next = temp.next.next;
+    }
+
+    static void display() {
+        Node temp = head;
+
+        while (temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+
+        for (int i = 0; i < n; i++) {
+            insert(sc.nextInt());
+        }
+
+        int pos = sc.nextInt();
+
+        deleteAtPosition(pos);
+
+        display();
+    }
+}
